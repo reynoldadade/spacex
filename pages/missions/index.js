@@ -1,11 +1,10 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import { gql, useQuery } from "@apollo/client";
-import MissionList from "../components/missions/missionList";
+import MissionList from "../../components/missions/missionList";
 
 const GET_MISSIONS = gql`
-  {
+  query {
     missions {
       id
       description
@@ -13,7 +12,7 @@ const GET_MISSIONS = gql`
     }
   }
 `;
-export default function Home() {
+export default function Missions() {
   const { loading, error, data } = useQuery(GET_MISSIONS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

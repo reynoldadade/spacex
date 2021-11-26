@@ -4,7 +4,7 @@ export default function Layout({ children }) {
   return (
     <div>
       <Header />
-      <main>{children}</main>
+      <main className="py-10 lg:px-40">{children}</main>
     </div>
   );
 }
