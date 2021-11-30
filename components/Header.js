@@ -15,7 +15,7 @@ export default function Header() {
       </div>
       <div className="flex justify-around flex-grow">
         {links.map((link) => (
-          <div key={link.name} className="hover:text-gray-400 p-3">
+          <div key={link.name} className="hover:text-gray-700 p-3">
             <Link href={link.path}>{link.name}</Link>
           </div>
         ))}

@@ -9,7 +9,6 @@ const GET_MISSION = gql`
     mission(id: $id) {
       description
       id
-      manufacturers
       name
       twitter
       website
@@ -17,8 +16,8 @@ const GET_MISSION = gql`
       payloads {
         payload_mass_kg
         id
-        reused
-        orbit
+        manufacturer
+        payload_type
       }
     }
   }
