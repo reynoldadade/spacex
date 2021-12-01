@@ -14,7 +14,7 @@ export default function Payloads({ payload }) {
         <div className="flex justify-between">
           <span>{payload.id}</span>
 
-          <button className="p-1">
+          <button className="p-1" onClick={() => setIsOpen(true)}>
             <FontAwesomeIcon icon={faInfoCircle} />
           </button>
         </div>
