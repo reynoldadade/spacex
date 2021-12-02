@@ -6,8 +6,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Dialog from "../components/UI/Dialog";
 import { useState } from "react";
+
 export default function Payloads({ payload }) {
   let [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="p-2  shadow-lg bg-gray-900 mr-2">
       <div className="text-2xl w-full ">
@@ -29,7 +31,7 @@ export default function Payloads({ payload }) {
         <span className="m-1">{payload.manufacturer}</span>
       </div>
 
-      <Dialog isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Dialog isOpen={isOpen} setIsOpen={setIsOpen} id={payload.id} />
     </div>
   );
 }

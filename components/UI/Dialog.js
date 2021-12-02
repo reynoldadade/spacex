@@ -1,7 +1,32 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { useQuery, gql } from "@apollo/client";
 
-export default function MyDialog({ isOpen, setIsOpen }) {
+//get payload
+const GET_PAYLOAD = gql`
+  query GET_PAYLOAD($id: ID!) {
+    payload(id: $id) {
+      customers
+      manufacturer
+      nationality
+      orbit
+      payload_mass_kg
+      payload_mass_lbs
+      payload_type
+      norad_id
+      reused
+      id
+    }
+  }
+`;
+export default function MyDialog({ isOpen, setIsOpen, id }) {
+  //get payload data
+  const { loading, error, data } = useQuery(GET_PAYLOAD, {
+    variables: { id },
+  });
+
+  const { payload } = data;
+
   return (
     <Transition show={isOpen} as={Fragment} appear>
       <Dialog
@@ -31,17 +56,58 @@ export default function MyDialog({ isOpen, setIsOpen }) {
           >
             <div className="relative bg-gray-900 rounded w-1/2 mx-auto p-4 shadow-lg">
               <Dialog.Title className="text-2xl py-2">
-                Payload Information
+                {payload.id}
               </Dialog.Title>
 
-              <p className="p-1">
-                Are you sure you want to deactivate your account? All of your
-                data will be permanently removed. This action cannot be undone.
-              </p>
+              <div>
+                <div className="p-1">
+                  <div className="text-xs uppercase">country</div>
+                  <div className="p-1">{payload.nationality}</div>
+                </div>
+                <div className="p-1">
+                  <div className="text-xs uppercase">Mass</div>
+                  <div className="p-1">
+                    {payload.payload_mass_kg ? payload.payload_mass_kg : "-"} kg
+                    /{" "}
+                    {payload.payload_mass_lbs ? payload.payload_mass_lbs : "-"}{" "}
+                    lbs
+                  </div>
+                </div>
+                <div className="p-1">
+                  <div className="text-xs uppercase">type</div>
+                  <div className="p-1">{payload.payload_type}</div>
+                </div>
+                <div className="p-1">
+                  <div className="text-xs uppercase">manufacturer</div>
+                  <div className="p-1">{payload.manufacturer}</div>
+                </div>
+                <div className="p-1">
+                  <div className="text-xs uppercase">
+                    Satellite Catalog Number(s)
+                  </div>
+                  <div>
+                    {payload.norad_id.map((id) => (
+                      <span key={id} className="px-1">
+                        {id}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="p-1">
+                  <div className="text-xs uppercase">customers</div>
+                  <div>
+                    {payload.customers.map((customer) => (
+                      <span key={customer} className="px-1">
+                        {customer}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded bg-white text-black hover:bg-gray-700 hover:text-white"
+                className="p-1 my-1 rounded bg-white text-black hover:bg-gray-700 hover:text-white"
               >
                 Close
               </button>
