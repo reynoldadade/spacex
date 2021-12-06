@@ -1,6 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useQuery, gql } from "@apollo/client";
+import PayloadDetails from "./PayloadDetails";
+import React from "react";
+const ref = React.createRef();
 
 //get payload
 const GET_PAYLOAD = gql`
@@ -24,11 +27,12 @@ export default function MyDialog({ isOpen, setIsOpen, id }) {
   const { loading, error, data } = useQuery(GET_PAYLOAD, {
     variables: { id },
   });
-
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
   const { payload } = data;
 
   return (
-    <Transition show={isOpen} as={Fragment} appear>
+    <Transition show={isOpen} as={Fragment}>
       <Dialog
         onClose={() => setIsOpen(false)}
         className="fixed z-10 inset-0 overflow-y-auto"
@@ -46,7 +50,8 @@ export default function MyDialog({ isOpen, setIsOpen, id }) {
           </Transition.Child>
 
           <Transition.Child
-            as={Fragment}
+            className="w-full"
+            // as={div}
             enter="ease-out duration-500 transition transform"
             enterFrom="opacity-0 scale-95 translate-x-5"
             enterTo="opacity-100 scale-100"
@@ -54,64 +59,7 @@ export default function MyDialog({ isOpen, setIsOpen, id }) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95 translate-x-5"
           >
-            <div className="relative bg-gray-900 rounded w-1/2 mx-auto p-4 shadow-lg">
-              <Dialog.Title className="text-2xl py-2">
-                {payload.id}
-              </Dialog.Title>
-
-              <div>
-                <div className="p-1">
-                  <div className="text-xs uppercase">country</div>
-                  <div className="p-1">{payload.nationality}</div>
-                </div>
-                <div className="p-1">
-                  <div className="text-xs uppercase">Mass</div>
-                  <div className="p-1">
-                    {payload.payload_mass_kg ? payload.payload_mass_kg : "-"} kg
-                    /{" "}
-                    {payload.payload_mass_lbs ? payload.payload_mass_lbs : "-"}{" "}
-                    lbs
-                  </div>
-                </div>
-                <div className="p-1">
-                  <div className="text-xs uppercase">type</div>
-                  <div className="p-1">{payload.payload_type}</div>
-                </div>
-                <div className="p-1">
-                  <div className="text-xs uppercase">manufacturer</div>
-                  <div className="p-1">{payload.manufacturer}</div>
-                </div>
-                <div className="p-1">
-                  <div className="text-xs uppercase">
-                    Satellite Catalog Number(s)
-                  </div>
-                  <div>
-                    {payload.norad_id.map((id) => (
-                      <span key={id} className="px-1">
-                        {id}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="p-1">
-                  <div className="text-xs uppercase">customers</div>
-                  <div>
-                    {payload.customers.map((customer) => (
-                      <span key={customer} className="px-1">
-                        {customer}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1 my-1 rounded bg-white text-black hover:bg-gray-700 hover:text-white"
-              >
-                Close
-              </button>
-            </div>
+            <PayloadDetails payload={payload} setIsOpen={setIsOpen} />
           </Transition.Child>
         </div>
       </Dialog>
