@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
-import { useEffect } from "react";
+import Launch from "../../components/launches/launch";
+import LaunchesList from "../../components/launches/LaunchesList";
 
 const GET_LAUNCHES = gql`
   query GET_LAUNCHES($limit: Int, $offset: Int) {
@@ -25,5 +26,12 @@ export default function Launches() {
     },
   });
 
-  return <div></div>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return (
+    <div>
+      <LaunchesList launches={data.launches} />
+    </div>
+  );
 }

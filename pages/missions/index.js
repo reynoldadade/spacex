@@ -25,7 +25,6 @@ export default function Missions() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="text-2xl font-bold">Missions</h1>
         <MissionList missions={data.missions} />
       </main>
     </div>
