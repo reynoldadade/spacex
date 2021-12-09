@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Header() {
   const links = [
     { name: "Missions", path: "/missions" },
-    { name: "Launch Pads", path: "/launch-pads" },
+    { name: "Launches", path: "/launches" },
     { name: "Landing Pads", path: "/launch-pads" },
     { name: "Rockets", path: "/rockets" },
     { name: "Dragons", path: "/dragons" },
