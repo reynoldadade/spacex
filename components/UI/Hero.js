@@ -5,6 +5,8 @@ import Image from "next/image";
 export default function Hero() {
   const moonRef = useRef();
   const sateliteRef = useRef();
+  //   const shuttleRef = useRef();
+  const astronautRef = useRef();
   useEffect(() => {
     gsap.to(moonRef.current, {
       duration: 15,
@@ -24,6 +26,16 @@ export default function Hero() {
       bottom: "100%",
       right: "100%",
       rotate: "180deg",
+    });
+  });
+  useEffect(() => {
+    gsap.to(astronautRef.current, {
+      duration: 2,
+      //   repeat: -1,
+      ease: "linear",
+      y: "50%",
+      repeat: -1,
+      yoyo: true,
     });
   });
   return (
@@ -46,6 +58,17 @@ export default function Hero() {
         <Image
           src={"/satelite.png"}
           alt="fullmoon from 2010"
+          layout="fill"
+          quality={100}
+        />
+      </div>
+      <div
+        className="overflow-hidden  absolute w-16 h-16 inset-1/2"
+        ref={astronautRef}
+      >
+        <Image
+          src={"/astronaut.png"}
+          alt="astronaut"
           layout="fill"
           quality={100}
         />
