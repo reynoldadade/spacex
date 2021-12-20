@@ -1,10 +1,13 @@
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { LinkOutlined } from "@ant-design/icons";
 
 export default function Hero() {
   const moonRef = useRef();
   const sateliteRef = useRef();
+  //   const shuttleRef = useRef();
+  const astronautRef = useRef();
   useEffect(() => {
     gsap.to(moonRef.current, {
       duration: 15,
@@ -26,6 +29,20 @@ export default function Hero() {
       rotate: "180deg",
     });
   });
+  useEffect(() => {
+    gsap.to(astronautRef.current, {
+      duration: 2,
+      //   repeat: -1,
+      ease: "linear",
+      y: "50%",
+      repeat: -1,
+      yoyo: true,
+    });
+  });
+
+  const goToRepo = () => {
+    window.open("https://github.com/reynoldadade/spacex", "_blank");
+  };
   return (
     <div className="w-full bg-viasat h-screen bg-cover grid grid-cols-2 relative">
       <div
@@ -50,6 +67,17 @@ export default function Hero() {
           quality={100}
         />
       </div>
+      <div
+        className="overflow-hidden  absolute w-16 h-16 inset-1/2"
+        ref={astronautRef}
+      >
+        <Image
+          src={"/astronaut.png"}
+          alt="astronaut"
+          layout="fill"
+          quality={100}
+        />
+      </div>
 
       <div className="col-span-1 p-4 flex justify-center  flex-col z-20">
         <p className="text-5xl font-bold p-2">SpaceX Missions</p>
@@ -62,8 +90,11 @@ export default function Hero() {
           TailwindCSS, react.js, HeadlessUI and GSAP.js to build this site.
         </p>
         <div className="py-4 px-2">
-          <button className="rounded p-2 bg-white text-black">
-            Check out the repo
+          <button
+            className="rounded p-2 bg-white text-black"
+            onClick={goToRepo}
+          >
+            Check out the repo <LinkOutlined />
           </button>
         </div>
       </div>
