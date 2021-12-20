@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import { useQuery, gql } from "@apollo/client";
+import { Fragment } from "react";
+import LaunchDetails from "../../components/launches/launchDetails";
 
 const GET_LAUNCH = gql`
   query GET_LAUNCH($id: ID!) {
@@ -34,5 +36,9 @@ export default function LaunchPage() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   const { launch } = data;
-  return <div></div>;
+  return (
+    <Fragment>
+      <LaunchDetails launch={launch} />
+    </Fragment>
+  );
 }
