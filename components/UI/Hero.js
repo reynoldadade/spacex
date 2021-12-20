@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { LinkOutlined } from "@ant-design/icons";
 
 export default function Hero() {
   const moonRef = useRef();
@@ -38,6 +39,10 @@ export default function Hero() {
       yoyo: true,
     });
   });
+
+  const goToRepo = () => {
+    window.open("https://github.com/reynoldadade/spacex", "_blank");
+  };
   return (
     <div className="w-full bg-viasat h-screen bg-cover grid grid-cols-2 relative">
       <div
@@ -85,8 +90,11 @@ export default function Hero() {
           TailwindCSS, react.js, HeadlessUI and GSAP.js to build this site.
         </p>
         <div className="py-4 px-2">
-          <button className="rounded p-2 bg-white text-black">
-            Check out the repo
+          <button
+            className="rounded p-2 bg-white text-black"
+            onClick={goToRepo}
+          >
+            Check out the repo <LinkOutlined />
           </button>
         </div>
       </div>
