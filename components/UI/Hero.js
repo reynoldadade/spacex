@@ -1,7 +1,8 @@
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { LinkOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function Hero() {
   const moonRef = useRef();
@@ -79,7 +80,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="col-span-1 p-4 flex justify-center  flex-col z-20">
+      <div className="col-span-1 p-4 flex justify-center flex-col z-20">
         <p className="text-5xl font-bold p-2">SpaceX Missions</p>
 
         <p className="p-2">
@@ -91,10 +92,10 @@ export default function Hero() {
         </p>
         <div className="py-4 px-2">
           <button
-            className="rounded p-2 bg-white text-black"
+            className="rounded p-2 bg-white text-black "
             onClick={goToRepo}
           >
-            Check out the repo <LinkOutlined />
+            Check out the repo <FontAwesomeIcon icon={faExternalLinkAlt} />
           </button>
         </div>
       </div>
