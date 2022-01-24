@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 
 export default function Header() {
+  useRouter()
   const links = [
     { name: "Missions", path: "/missions" },
     { name: "Launches", path: "/launches" },
@@ -15,7 +18,7 @@ export default function Header() {
       </div>
       <ul className="flex justify-around flex-grow">
         {links.map((link) => (
-          <li key={link.name} className="hover:text-gray-700 p-3">
+          <li key={link.name} className="hover:text-gray-700 p-3" >
             <Link href={link.path}>{link.name}</Link>
           </li>
         ))}
